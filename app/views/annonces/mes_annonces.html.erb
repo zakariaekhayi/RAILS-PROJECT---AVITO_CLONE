@@ -1,0 +1,133 @@
+<%= stylesheet_link_tag "mes_annonces", "data-turbo-track": "reload" %>
+<!-- app/views/annonces/index.html.erb -->
+<div class="annonces-container">
+  <div class="tabs-header">
+    <div class="tab active">
+      <i class="fas fa-list"></i>
+      Mes annonces
+    </div>
+    <div class="tab">
+      <i class="fas fa-shopping-cart"></i>
+      Mes commandes
+    </div>
+    <div class="tab">
+      <i class="far fa-heart"></i>
+      Mes favoris
+    </div>
+    <div class="tab">
+      <i class="fas fa-cog"></i>
+      Réglages
+    </div>
+  </div>
+ <div class="sous-container">
+  <div class="view-controls">
+    <div class="view-buttons">
+      <button class="view-btn grid-view active"><i class="fas fa-th"></i></button>
+      <button class="view-btn list-view"><i class="fas fa-list"></i></button>
+    </div>
+    
+  </div>
+
+  <div class="filter-section">
+    <div class="filter-group">
+      <div class="filter-option">
+        <input type="radio" id="all-annonces" name="annonce-type" checked>
+        <label for="all-annonces">Toutes les Annonces (<%= @annonces.count %>)</label>
+      </div>
+      <div class="filter-option">
+        <input type="radio" id="boosted-annonces" name="annonce-type">
+        <label for="boosted-annonces">Annonces Boostées (0)</label>
+      </div>
+      <div class="filter-option">
+        <input type="radio" id="non-boosted-annonces" name="annonce-type">
+        <label for="non-boosted-annonces">Annonces non Boostées (0)</label>
+      </div>
+    </div>
+
+    <div class="filter-group">
+      <h3 class="filter-title">Statut</h3>
+      <div class="filter-option">
+        <input type="radio" id="active-annonces" name="annonce-status" checked>
+        <label for="active-annonces">Actives (<%= @annonces.count %>)</label>
+      </div>
+      <div class="filter-option">
+        <input type="radio" id="moderation-annonces" name="annonce-status">
+        <label for="moderation-annonces">Dans la modération (0)</label>
+      </div>
+      <div class="filter-option">
+        <input type="radio" id="rejected-annonces" name="annonce-status">
+        <label for="rejected-annonces">Rejetées (0)</label>
+      </div>
+      <div class="filter-option">
+        <input type="radio" id="deactivated-annonces" name="annonce-status">
+        <label for="deactivated-annonces">Désactivées (0)</label>
+      </div>
+      <div class="filter-option">
+        <input type="radio" id="deleted-annonces" name="annonce-status">
+        <label for="deleted-annonces">Supprimées (0)</label>
+      </div>
+      <div class="filter-option">
+        <input type="radio" id="payment-annonces" name="annonce-status">
+        <label for="payment-annonces">Paiement en attente (0)</label>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <% if @annonces.empty? %>
+    <div class="empty-state">
+      <div class="empty-illustration">
+         <%= image_tag "noResultActivate.png", alt: "Avito" %>
+      </div>
+      <div class="empty-message">
+        <h2>Vous avez quelque chose à vendre?</h2>
+        <p>Déposez votre annonce gratuitement sur Avito.ma aujourd hui</p>
+        <%= link_to "Publier une annonce", new_annonce_path, class: "publish-btn" %>
+      </div>
+    </div>
+  <% else %>
+    <div class="annonces-list">
+      <% @annonces.each do |annonce| %>
+        <div class="annonce-card">
+          <div class="annonce-image">
+            <div class="placeholder-image">  
+              <% if annonce.image.present? %>
+                <img src="<%= annonce.image %>" alt="<%= annonce.titre %>" class="annonce-image">
+              <% else %>
+                <div class="annonce-image">
+                  <span style="color: #999;">Pas d image</span>
+                </div>
+              <% end %>
+            </div>
+          </div>
+          <div class="annonce-details">
+            <h3><%= link_to annonce.titre, annonce_path(annonce) %></h3>
+            <p class="annonce-price"><%= number_to_currency(annonce.prix, unit: "MAD ", precision: 0) %></p>
+            <p class="annonce-location"><%= annonce.ville %></p>
+            <p class="annonce-date"><%= annonce.created_at.strftime("%d/%m/%Y") %></p>
+            <div class="annonce-actions">
+              <%= link_to edit_annonce_path(annonce), class: "edit-btn" do %>
+                <i class="fas fa-edit"></i> Modifier
+              <% end %>
+              <%= button_to annonce_path(annonce), method: :delete, data: { confirm: "Êtes-vous sûr?" }, class: "delete-btn" do %>
+                <i class="fas fa-trash"></i> Supprimer
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="pagination">
+      <a href="#" class="page-number active">1</a>
+      <a href="#" class="page-number">2</a>
+      <a href="#" class="page-number">3</a>
+      <a href="#" class="page-number">4</a>
+      <a href="#" class="page-number">5</a>
+      <a href="#" class="page-number">6</a>
+      <a href="#" class="page-number">7</a>
+      <a href="#" class="page-number">8</a>
+      <a href="#" class="page-number next"><i class="fas fa-chevron-right"></i></a>
+    </div>
+  <% end %>
+</div>

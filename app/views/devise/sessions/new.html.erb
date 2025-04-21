@@ -1,0 +1,71 @@
+<!-- app/views/devise/sessions/new.html.erb -->
+ <%= stylesheet_link_tag "login", "data-turbo-track": "reload" %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <!-- Partie gauche avec le logo et le slogan -->
+      <div class="left-panel">
+        <h1 class="main-title">Vente et achat en ligne</h1>
+        <p class="subtitle">
+          <%= ApplicationController.site_name %>, la marketplace 
+          <span class="highlight">Numéro 1</span> de vente et d achat en ligne 
+          <%= ApplicationController.region_name ? "au #{ApplicationController.region_name}" : "" %>.
+        </p>
+        
+        <!-- Logo coloré similaire à Avito -->
+        <div class="site-logo">
+          <%= image_tag "avito_logo.png", alt: "Logo" %>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-md-6">
+      <!-- Partie droite avec le formulaire de connexion -->
+      <div class="login-form-container">
+        <h2 class="form-title">Connectez-vous à <%= ApplicationController.site_name %></h2>
+        <p class="form-subtitle">Utilisez votre adresse e-mail pour se connecter rapidement</p>
+        
+        <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "login-form" }) do |f| %>
+          <div class="form-group">
+            <%= f.label :email, "Adresse e-mail" %>
+            <div class="input-field">
+              <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control", placeholder: "Ex: utilisateur@exemple.com" %>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <%= f.label :password, "Mot de passe" %>
+            <div class="input-field">
+              <%= f.password_field :password, autocomplete: "current-password", class: "form-control" %>
+            </div>
+          </div>
+          
+          <div class="form-options">
+            <% if devise_mapping.rememberable? %>
+              <div class="remember-me">
+                <%= f.check_box :remember_me %>
+                <%= f.label :remember_me, "Se souvenir de moi" %>
+              </div>
+            <% end %>
+            <div class="forgot-password">
+              <%= link_to "Mot de passe oublié ?", new_password_path(resource_name), class: "link-forgot" %>
+            </div>
+          </div>
+          
+          <%= f.submit "Continuer", class: "btn btn-primary btn-continue" %>
+        <% end %>
+        
+        <div class="alternative-login">
+          <p class="divider">Ou avec</p>
+         
+          <!-- Connexion avec Google -->
+          <a href="#" class="btn-social">
+            <i class="fa fa-google"></i> Se connecter avec Google
+          </a>
+        <div class="business-account">
+          <%= link_to "Vous avez une boutique en ligne?", new_registration_path(resource_name), class: "business-link" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

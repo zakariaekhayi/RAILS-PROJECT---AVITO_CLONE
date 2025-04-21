@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>AvitoClone</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body>
+    <% unless @hide_navbar %>
+      <header>
+        <div class="navbar">
+          <div class="logo">
+            <%= image_tag "avito_logo.png", alt: "Avito" %>
+          </div>
+          <ul class="nav-menu">
+            <li><a href="#">Auto Neuf</a></li>
+            <li><a href="#">Immo Neuf</a></li>
+            <li><a href="#">Crédit Immobilier</a></li>
+            <li><a href="#">Boutiques</a></li>
+            <li><a href="#">Magazine</a></li>
+          </ul>
+          <div class="user-actions">
+            <% if user_signed_in? %>
+              <span class="welcome-message">Bienvenue, <%= current_user.username %>!</span>
+              <%= link_to "Mes annonces", mes_annonces_annonces_path, class: "nav-btn" %>
+              <%= link_to "Publier une annonce", newannonces_path, class: "signup-btn" %>
+              <%= button_to "Déconnexion", destroy_user_session_path, method: :delete, class: "login-btn", form: { data: { turbo: false } } %>
+            <% else %>
+              <%= link_to "Se Connecter", new_user_session_path, class: "login-btn" %>
+              <%= link_to "Publier une annonce", new_user_registration_path, class: "signup-btn" %>
+            <% end %>
+          </div>
+        </div>
+      </header>
+    <% end %>
+    <%= yield %>
+  </body>
+</html>

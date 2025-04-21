@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clone Avito</title>
+  <style>
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    
+    body {
+      background-color: #f6f6f6;
+      color: #333;
+    }
+    
+    
+    header {
+      width: 100%;
+      background-color: #fff;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 10px 20px;
+      height: 65px;
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+    
+    .logo img {
+      height: 38px;
+      width: auto;
+    }
+    
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      list-style: none;
+      margin-left: 20px;
+    }
+    
+    .nav-menu li {
+      margin: 0 15px;
+    }
+    
+    .nav-menu a {
+      text-decoration: none;
+      color: #444;
+      font-size: 14px;
+      font-weight: 500;
+    }
+    
+    .user-actions {
+      display: flex;
+      align-items: center;
+    }
+    
+    .welcome-message {
+      margin-right: 15px;
+      font-size: 14px;
+      color: #555;
+    }
+    
+    .nav-btn {
+      text-decoration: none;
+      color: #444;
+      margin-right: 15px;
+      font-size: 14px;
+      padding: 6px 10px;
+      border-radius: 4px;
+      transition: background-color 0.2s;
+    }
+    
+    .nav-btn:hover {
+      background-color: #f0f0f0;
+    }
+    
+    .login-btn, .signup-btn {
+      text-decoration: none;
+      padding: 8px 16px;
+      border-radius: 4px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-weight: 500;
+    }
+    
+    .login-btn {
+      color: #444;
+      background-color: #fff;
+      border: 1px solid #ddd;
+      margin-right: 10px;
+    }
+    
+    .login-btn:hover {
+      background-color: #f5f5f5;
+    }
+    
+    .signup-btn, .publish-btn {
+      color: #fff;
+      background-color: #ff5a5f;
+      border: none;
+      display: flex;
+      align-items: center;
+    }
+    
+    .signup-btn:hover, .publish-btn:hover {
+      background-color: #ff4146;
+    }
+    
+    .publish-btn svg {
+      margin-right: 5px;
+    }
+    
+    
+    .search-container {
+      max-width: 1200px;
+      margin: 20px auto;
+      padding: 0 20px;
+      display: flex;
+      justify-content: space-between;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+    }
+    
+    .search-input {
+      flex-grow: 1;
+      padding: 12px 16px;
+      border: none;
+      font-size: 15px;
+      color: #333;
+    }
+    
+    .category-select {
+      padding: 12px 16px;
+      border: none;
+      border-left: 1px solid #eee;
+      background-color: #fff;
+      color: #333;
+      font-size: 15px;
+      cursor: pointer;
+    }
+    
+    .location-select {
+      padding: 12px 16px;
+      border: none;
+      border-left: 1px solid #eee;
+      background-color: #fff;
+      color: #333;
+      font-size: 15px;
+      cursor: pointer;
+    }
+    
+    .search-btn {
+      padding: 12px 25px;
+      background-color: #4073f1;
+      color: white;
+      border: none;
+      font-size: 15px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+    
+    .search-btn:hover {
+      background-color: #3461db;
+    }
+    
+    .categories-section {
+      max-width: 1200px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+    
+    .categories-grid {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    
+    .category-card {
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      width: calc(25% - 10px);
+      transition: transform 0.2s;
+      overflow: hidden;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      align-items: center;
+      padding: 15px;
+    }
+    
+    .category-card:hover {
+      transform: translateY(-3px);
+    }
+    
+    .category-icon {
+      width: 40px;
+      height: 40px;
+      margin-right: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background-color: #f0f5ff;
+      color: #4073f1;
+    }
+    
+    
+    .main-content {
+      max-width: 1200px;
+      margin: 30px auto;
+      padding: 0 20px;
+      display: none; 
+    }
+    
+   
+    .annonces-section {
+      max-width: 1200px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+    
+    .annonces-title {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 20px;
+      color: #333;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+    .annonces-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    
+    .annonce-card {
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      transition: transform 0.2s;
+    }
+    
+    .annonce-card:hover {
+      transform: translateY(-3px);
+    }
+    
+    .annonce-image {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #f8f8f8;
+    }
+    
+    .annonce-details {
+      padding: 15px;
+    }
+    
+    .annonce-title {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #333;
+    }
+    
+    .annonce-price {
+      font-size: 18px;
+      font-weight: 700;
+      color: #41B3A3;
+      margin-bottom: 6px;
+    }
+    
+    .annonce-location {
+      font-size: 14px;
+      color: #777;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+    }
+    
+    .annonce-location::before {
+      content: '📍';
+      margin-right: 5px;
+    }
+    
+    .annonce-date {
+      font-size: 12px;
+      color: #999;
+    }
+    
+    .voir-plus {
+      display: block;
+      text-align: center;
+      text-decoration: none;
+      color: #4073f1;
+      font-weight: 500;
+      margin-top: 20px;
+      padding: 10px;
+      font-size: 15px;
+    }
+    
+    
+    footer {
+      background-color: #fff;
+      margin-top: 50px;
+      padding: 30px 20px;
+      border-top: 1px solid #eee;
+    }
+    
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 30px;
+    }
+    
+    .footer-section h3 {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 15px;
+      color: #333;
+    }
+    
+    .footer-links {
+      list-style: none;
+    }
+    
+    .footer-links li {
+      margin-bottom: 10px;
+    }
+    
+    .footer-links a {
+      text-decoration: none;
+      color: #666;
+      font-size: 14px;
+      transition: color 0.2s;
+    }
+    
+    .footer-links a:hover {
+      color: #4073f1;
+    }
+    
+    .copyright {
+      text-align: center;
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 1px solid #eee;
+      color: #999;
+      font-size: 13px;
+    }
+    
+    
+    @media (max-width: 768px) {
+      .categories-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .footer-container {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .category-card {
+        width: calc(50% - 5px);
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .navbar {
+        flex-direction: column;
+        height: auto;
+        padding: 15px;
+      }
+      
+      .user-actions {
+        margin-top: 15px;
+      }
+      
+      .search-container {
+        flex-direction: column;
+      }
+      
+      .search-input, .category-select, .location-select, .search-btn {
+        width: 100%;
+        border-radius: 0;
+        border-left: none;
+        border-bottom: 1px solid #eee;
+      }
+      
+      .annonces-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .footer-container {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+
+  <!-- Search Container -->
+  <div class="search-container">
+    <input type="text" class="search-input" placeholder="Que recherchez-vous ?">
+    <select class="category-select">
+      <option value="">Toutes les catégories</option>
+      <option value="immobilier">Immobilier</option>
+      <option value="vehicules">Véhicules</option>
+      <option value="marketplace">Marketplace</option>
+      <option value="emploi_services">Emplois et Services</option>
+    </select>
+    <select class="location-select">
+      <option value="">Choisir ville - secteur</option>
+      <option value="casablanca">Casablanca</option>
+      <option value="rabat">Rabat</option>
+      <option value="marrakech">Marrakech</option>
+      <option value="tanger">Tanger</option>
+    </select>
+    <button class="search-btn">Rechercher</button>
+  </div>
+
+  <!-- Categories Section -->
+  <div class="categories-section">
+    <div class="categories-grid">
+      <a href="#" class="category-card">
+        <div class="category-icon">🏠</div>
+        <span>Immobilier</span>
+      </a>
+      <a href="#" class="category-card">
+        <div class="category-icon">🚗</div>
+        <span>Véhicules</span>
+      </a>
+      <a href="#" class="category-card">
+        <div class="category-icon">🛒</div>
+        <span>Marketplace</span>
+      </a>
+      <a href="#" class="category-card">
+        <div class="category-icon">👔</div>
+        <span>Emplois et Services</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="main-content">
+    <h1>Bienvenue sur notre clone d Avito</h1>
+    <p>Trouvez des annonces ou publiez les vôtres facilement!</p>
+    
+    <div class="actions-container">
+      <%= link_to "Voir toutes les annonces", annonces_path, class: "cta-button" %>
+      <% if user_signed_in? %>
+        <%= link_to "Publier une annonce", new_annonce_path, class: "cta-button cta-primary" %>
+      <% end %>
+    </div>
+  </div>
+  
+  <!-- Premium Annonces Section -->
+  <div class="annonces-section">
+    <h2 class="annonces-title">Notre sélection premium</h2>
+    
+    <div class="annonces-grid">
+      <!-- Exemple d annonce premium -->
+      <div class="annonce-card">
+      <%= image_tag "placeholder-image.jpg", alt: "Annonce premium", class: "annonce-image", style: "filter: invert(0);" %>
+
+        <div class="annonce-details">
+          <h3 class="annonce-title">Appartement de luxe à Casablanca</h3>
+          <p class="annonce-price">1 200 000 MAD</p>
+          <p class="annonce-location">Casablanca, Maarif</p>
+          <p class="annonce-date">Publié il y a 2 heures</p>
+        </div>
+      </div>
+      <!-- Répétez pour plus d annonces premium -->
+    </div>
+  </div>
+  
+  <!-- Annonces récentes Section -->
+  <div class="annonces-section">
+    <h2 class="annonces-title">Nouvelles annonces d Appartements <span style="font-size: 14px; font-weight: normal; color: #4073f1;">Plus d annonces</span></h2>
+    
+    <% if @annonces.present? %>
+      <div class="annonces-grid">
+        <% @annonces.each do |annonce| %>
+          <%= link_to annonce_path(annonce), style: "text-decoration: none; color: inherit;" do %>
+            <div class="annonce-card">
+              <% if annonce.image.present? %>
+                <img src="<%= annonce.image %>" alt="<%= annonce.titre %>" class="annonce-image">
+              <% else %>
+                <div class="annonce-image">
+                  <span style="color: #999;">Pas d image</span>
+                </div>
+              <% end %>
+              
+              <div class="annonce-details">
+                <h3 class="annonce-title"><%= truncate(annonce.titre, length: 40) %></h3>
+                <p class="annonce-price"><%= number_to_currency(annonce.prix, unit: "MAD ", precision: 0) %></p>
+                <p class="annonce-location"><%= annonce.ville %></p>
+                <p class="annonce-date">Publié le <%= annonce.created_at.strftime("%d/%m/%Y") %></p>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+      
+      <%= link_to "Voir toutes les annonces →", annonces_path, class: "voir-plus" %>
+    <% else %>
+      <p style="text-align: center; color: #666;">Aucune annonce disponible pour le moment.</p>
+    <% end %>
+  </div>
+
+  <!-- Nouvelles annonces de Maisons et villas Section -->
+  <div class="annonces-section">
+    <h2 class="annonces-title">Nouvelles annonces de Maisons et villas <span style="font-size: 14px; font-weight: normal; color: #4073f1;">Plus d annonces</span></h2>
+    
+    <div class="annonces-grid">
+      <!-- Insérer ici le contenu dynamique des maisons et villas -->
+    </div>
+  </div>
+
+  <!-- Avito Magazine Section -->
+  <div class="annonces-section">
+    <h2 class="annonces-title">Nos Articles Avito Magazine</h2>
+    
+    <div class="annonces-grid">
+      <!-- Insérer ici le contenu dynamique du magazine -->
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-section">
+        <h3>AVITO VÉHICULES</h3>
+        <ul class="footer-links">
+          <li><a href="#">VOITURES</a></li>
+          <li><a href="#">Voitures d occasion</a></li>
+          <li><a href="#">MOTOS</a></li>
+          <li><a href="#">VÉLOS</a></li>
+          <li><a href="#">PIÈCES ET ACCESSOIRES</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-section">
+        <h3>AVITO IMMOBILIER</h3>
+        <ul class="footer-links">
+          <li><a href="#">VENTES IMMOBILIÈRES</a></li>
+          <li><a href="#">Appartement à vendre</a></li>
+          <li><a href="#">Maisons à vendre</a></li>
+          <li><a href="#">LOCATIONS IMMOBILIÈRES</a></li>
+          <li><a href="#">Appartement à louer</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-section">
+        <h3>AVITO ENTREPRISE</h3>
+        <ul class="footer-links">
+          <li><a href="#">EMPLOI</a></li>
+          <li><a href="#">Centre d appels</a></li>
+          <li><a href="#">SERVICES</a></li>
+          <li><a href="#">STAGES, COURS ET FORMATIONS</a></li>
+          <li><a href="#">Cours et Formations</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-section">
+        <h3>AVITO MARKET</h3>
+        <ul class="footer-links">
+          <li><a href="#">INFORMATIQUE, MULTIMEDIA ET GADGETS</a></li>
+          <li><a href="#">Smartphone et Téléphone</a></li>
+          <li><a href="#">ÉQUIPEMENT POUR BÉBÉ ET ENFANT</a></li>
+          <li><a href="#">MAISON ET JARDIN</a></li>
+          <li><a href="#">Petit Électroménager</a></li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="copyright">
+      © 2025 Clone Avito - Tous droits réservés
+    </div>
+  </footer>
+</body>
+</html>

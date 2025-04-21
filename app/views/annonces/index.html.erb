@@ -1,0 +1,35 @@
+<div class="container mx-auto px-4 py-8">
+  <h1 class="text-2xl font-bold mb-6">Toutes les annonces</h1>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <% @annonces.each do |annonce| %>
+      <div class="border rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
+        <% if annonce.image.present? %>
+          <img src="<%= annonce.image %>" alt="<%= annonce.titre %>" class="w-full h-48 object-cover">
+        <% else %>
+          <div class="w-full h-48 bg-gray-200 flex items-center justify-center">
+            <span class="text-gray-500">Pas d image</span>
+          </div>
+        <% end %>
+        
+        <div class="p-4">
+          <h2 class="text-xl font-semibold"><%= annonce.titre %></h2>
+          <p class="text-lg font-bold text-green-600 mt-2"><%= number_to_currency(annonce.prix, unit: "MAD ", precision: 0) %></p>
+          <p class="text-gray-600 mt-1"><%= annonce.ville %></p>
+          <p class="text-gray-500 text-sm mt-2">Publié par <%= annonce.user.username %></p>
+          
+          <div class="mt-4">
+            <%= link_to "Voir détails", annonce_path(annonce), class: "text-blue-600 hover:underline" %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <% if user_signed_in? %>
+    <div class="mt-8">
+      <%= link_to "Publier une annonce", new_annonce_path, class: "bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" %>
+    </div>
+    <%= link_to '🏠 Retour à l\'accueil', root_path, style: "display: inline-block; margin-bottom: 20px;" %>
+  <% end %>
+</div>

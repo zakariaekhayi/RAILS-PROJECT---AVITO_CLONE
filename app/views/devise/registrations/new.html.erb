@@ -1,0 +1,78 @@
+
+ <%= stylesheet_link_tag "signup.css", "data-turbo-track": "reload" %>
+<div class="signup-container">
+  <div class="signup-left">
+    <h1>Vente et achat en ligne</h1>
+    <p>Avito, la marketplace <span class="highlight">Numéro 1</span> de vente et d achat en ligne au Maroc.</p>
+    
+    <div class="logo-container">
+      <%= image_tag "avito_logo.png", alt: "Logo", class: "avito-logo" %>
+    </div>
+  </div>
+  
+  <div class="signup-right">
+    <h2>Créez votre compte</h2>
+    <p class="subtitle">Utilisez votre numéro de téléphone pour créer un compte rapidement</p>
+    
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "signup-form" }) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+      
+      <div class="field phone-field">
+        <%= f.label :phone_number, "Numéro de téléphone" %>
+        <div class="phone-input-container">
+          <div class="country-code">
+            <span class="flag">🇲🇦</span>
+            <span class="arrow">▼</span>
+          </div>
+          <%= f.text_field :phone_number, placeholder: "Ex: 0623332**", class: "phone-input" %>
+        </div>
+      </div>
+      
+      <div class="field">
+        <%= f.label :email %>
+        <%= f.email_field :email, autocomplete: "email" %>
+      </div>
+      
+      <div class="field">
+        <%= f.label :username, "Nom d'utilisateur" %>
+        <%= f.text_field :username %>
+      </div>
+      
+      <div class="field">
+        <%= f.label :password, "Mot de passe" %>
+        <%= f.password_field :password, autocomplete: "new-password" %>
+        <% if @minimum_password_length %>
+        <small>(<%= @minimum_password_length %> caractères minimum)</small>
+        <% end %>
+      </div>
+      
+      <div class="field">
+        <%= f.label :password_confirmation, "Confirmation du mot de passe" %>
+        <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+      </div>
+      
+      <div class="forgot-password">
+        <%= link_to "Mot de passe oublié ?", new_password_path(resource_name) %>
+      </div>
+      
+      <div class="actions">
+        <%= f.submit "Continuer", class: "signup-button" %>
+      </div>
+    <% end %>
+    
+    <div class="alternative-login">
+      <p>Ou avec</p>
+      
+      <div class="social-login">
+        <button class="google-login">
+          <%= image_tag "google_icon.png", alt: "Logo"%>
+          Se connecter avec Google
+        </button>
+      </div>
+    </div>
+    
+    <div class="store-link">
+      <%= link_to "Vous avez une boutique Avito?", "#" %>
+    </div>
+  </div>
+</div>
