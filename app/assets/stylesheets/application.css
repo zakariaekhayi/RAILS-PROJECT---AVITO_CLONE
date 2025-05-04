@@ -67,7 +67,7 @@
   .welcome-message {
     margin-right: 15px;
     font-size: 14px;
-    color: #555;
+    color: #fb0d0d;
   }
   
   .nav-btn {
@@ -121,4 +121,124 @@
     margin-right: 5px;
   }
   
+  /* Footer styles */
+  .avito-footer {
+    background-color: #fff;
+    padding: 30px 20px;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+  
+  .footer-columns {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    margin-bottom: 30px;
+  }
+  
+  .footer-column h4 {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #333;
+  }
+  
+  .footer-column ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .footer-column ul li {
+    margin-bottom: 8px;
+  }
+  
+  .footer-column ul li a {
+    color: #666;
+    text-decoration: none;
+    font-size: 13px;
+  }
+  
+  .footer-column ul li a:hover {
+    color: #3c9;
+  }
+  
+  .footer-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+  }
+  
+  .footer-logo {
+    width: 100px;
+  }
+  
+  .footer-logo img {
+    width: 100%;
+  }
+  
+  .footer-copyright {
+    font-size: 12px;
+    color: #999;
+  }
+  
+  .footer-social {
+    display: flex;
+    gap: 15px;
+  }
+  
+  .footer-social a {
+    color: #666;
+    font-size: 18px;
+  }
+  
+  /* Responsive styles */
+  @media (max-width: 992px) {
+    .listings-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .footer-columns {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .vehicle-specs {
+      flex-direction: column;
+      gap: 15px;
+    }
+    
+    .inspection-cta {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 15px;
+    }
+    
+    .inspection-image {
+      margin-left: 0;
+    }
+    
+    .articles-grid {
+      grid-template-columns: repeat(1, 1fr);
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .listings-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .footer-columns {
+      grid-template-columns: 1fr;
+    }
+    
+    .footer-bottom {
+      flex-direction: column;
+      gap: 15px;
+      text-align: center;
+    }
+  }
   

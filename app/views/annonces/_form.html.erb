@@ -1,5 +1,4 @@
-
- <%= stylesheet_link_tag "new_annonce.css", "data-turbo-track": "reload" %>
+<%= stylesheet_link_tag "new_annonce.css", "data-turbo-track": "reload" %>
 
 <div class="create-announcement-container">
   <div class="progress-header">
@@ -23,7 +22,7 @@
     </div>
   </div>
 
-  <%= form_with(model: annonce, local: true, class: "announcement-form") do |form| %>
+  <%= form_with(model: annonce, local: true, multipart: true, class: "announcement-form") do |form| %>
     <% if annonce.errors.any? %>
       <div class="form-errors">
         <h2><%= pluralize(annonce.errors.count, "erreur") %> :</h2>
@@ -141,7 +140,13 @@
 
       <div class="form-group">
         <%= form.label :image, "Images de l'annonce" %>
-        <%= form.text_field :image, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
+        <div class="image-upload-wrapper">
+          <span class="image-icon">
+            <i class="fas fa-camera"></i>
+          </span>
+          <%= form.file_field :image, accept: "image/*", class: "form-input" %>
+          <p class="image-help-text">Choisissez une image pour votre annonce (JPG, PNG, GIF)</p>
+        </div>
       </div> 
      </div>
 

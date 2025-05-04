@@ -91,13 +91,13 @@
         <div class="annonce-card">
           <div class="annonce-image">
             <div class="placeholder-image">  
-              <% if annonce.image.present? %>
-                <img src="<%= annonce.image %>" alt="<%= annonce.titre %>" class="annonce-image">
-              <% else %>
-                <div class="annonce-image">
-                  <span style="color: #999;">Pas d image</span>
-                </div>
-              <% end %>
+            <% if annonce.image.attached? %>
+            <%= image_tag annonce.image, alt: annonce.titre, class: "annonce-image" %>
+          <% else %>
+            <div class="annonce-image">
+              <span style="color: #999;">Pas d image</span>
+            </div>
+          <% end %>
             </div>
           </div>
           <div class="annonce-details">

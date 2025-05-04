@@ -1,0 +1,189 @@
+/* Style global */
+body {
+    font-family: 'Roboto', 'Segoe UI', system-ui, sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+  }
+  
+  /* Container principal */
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+  }
+  
+  /* Titre principal */
+  h1.text-2xl {
+    color: #1a365d;
+    font-size: 2.25rem;
+    text-align: center;
+    margin-bottom: 2rem;
+    position: relative;
+    padding-bottom: 0.75rem;
+  }
+  
+  h1.text-2xl:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 3px;
+    background-color: #48bb78;
+  }
+  
+  /* Grille d'annonces */
+  .grid {
+    display: grid;
+    grid-gap: 1.5rem;
+  }
+  
+  /* Carte d'annonce */
+  .border {
+    border: none;
+    border-radius: 12px;
+    background-color: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .border:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+  }
+  
+  /* Image de l'annonce */
+  .object-cover {
+    transition: transform 0.5s ease;
+  }
+  
+  .border:hover .object-cover {
+    transform: scale(1.05);
+  }
+  
+  /* Fallback d'image */
+  .bg-gray-200 {
+    background-color: #edf2f7;
+    color: #a0aec0;
+    font-style: italic;
+  }
+  
+  /* Contenu de l'annonce */
+  .p-4 {
+    padding: 1.25rem;
+  }
+  
+  /* Titre de l'annonce */
+  h2.text-xl {
+    color: #2d3748;
+    font-weight: 600;
+    font-size: 1.25rem;
+    line-height: 1.4;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  /* Prix */
+  .text-green-600 {
+    color: #38a169;
+    font-size: 1.25rem;
+    font-weight: 700;
+  }
+  
+  /* Ville */
+  .text-gray-600 {
+    font-weight: 500;
+    font-size: 0.95rem;
+    color: #4a5568;
+  }
+  
+  /* Nom d'utilisateur */
+  .text-gray-500 {
+    color: #718096;
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+  }
+  
+  /* Lien "Voir détails" */
+  .text-blue-600 {
+    color: #3182ce;
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.2s ease;
+    display: inline-block;
+    margin-top: 0.75rem;
+  }
+  
+  .text-blue-600:hover {
+    color: #2b6cb0;
+    text-decoration: underline;
+  }
+  
+  /* Bouton "Publier une annonce" */
+  .bg-green-600 {
+    background-color: #38a169;
+    color: white;
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.375rem;
+    text-decoration: none;
+    display: inline-block;
+    transition: background-color 0.3s, transform 0.2s;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+  }
+  
+  .bg-green-600:hover {
+    background-color: #2f855a;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Lien de retour à l'accueil */
+  [style*="display: inline-block"] {
+    display: inline-block;
+    margin: 1.5rem 0;
+    color: #4a5568;
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.2s;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    background-color: #f7fafc;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+  
+  [style*="display: inline-block"]:hover {
+    color: #2d3748;
+    background-color: #edf2f7;
+  }
+  
+  /* Media queries pour la responsivité */
+  @media (max-width: 768px) {
+    .grid {
+      grid-template-columns: 1fr;
+    }
+    
+    h1.text-2xl {
+      font-size: 1.75rem;
+    }
+    
+    .mt-8 {
+      text-align: center;
+    }
+  }
+  
+  @media (min-width: 768px) and (max-width: 1024px) {
+    .grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }

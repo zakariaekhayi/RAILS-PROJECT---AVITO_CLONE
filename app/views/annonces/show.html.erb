@@ -1,12 +1,12 @@
-<div class="container mx-auto px-4 py-8">
-  <div class="mb-4">
-    <%= link_to "← Retour aux annonces", annonces_path, class: "text-blue-600 hover:underline" %>
-  </div>
+<%= stylesheet_link_tag "details", "data-turbo-track": "reload" %>
 
+<div class="container mx-auto px-4 py-8">
+ 
   <div class="bg-white rounded-lg shadow-md overflow-hidden">
-    <% if @annonce.image.present? %>
-      <img src="<%= @annonce.image %>" alt="<%= @annonce.titre %>" class="w-full h-96 object-cover">
+    <% if @annonce.image.attached? %>
+      <%= image_tag @annonce.image, alt: @annonce.titre, class: "w-full h-96 object-cover" %>
     <% end %>
+    
     
     <div class="p-6">
       <h1 class="text-3xl font-bold mb-2"><%= @annonce.titre %></h1>
@@ -30,6 +30,13 @@
         <p class="text-gray-500 text-sm">Contact: <%= @annonce.user.phone_number %></p>
         <p class="text-gray-500 text-sm">Email: <%= @annonce.user.email %></p>
         <p class="text-gray-500 text-sm">Date de publication: <%= @annonce.created_at.strftime("%d/%m/%Y") %></p>
+        <div class="seller-actions">
+        
+        <div class="contact-buttons">
+          <a href="#" class="whatsapp-btn"><i class="fab fa-whatsapp"></i></a>
+          <a href="#" class="message-btn"><i class="far fa-comment-alt"></i></a>
+        </div>
+      </div>
       </div>
       
       <% if user_signed_in? && @annonce.user == current_user %>
@@ -41,4 +48,112 @@
       <% end %>
     </div>
   </div>
+
+  <div class="other-seller-ads">
+  <h2>
+    Autres annonces de ce vendeur
+    <a href="#">Voir plus</a>
+  </h2>
+  
+  <div class="ads-grid">
+    <% @annonces_vendeur = Annonce.where(user_id: @annonce.user_id).where.not(id: @annonce.id).limit(4) %>
+    <% @annonces_vendeur.each do |annonce| %>
+      <a href="<%= annonce_path(annonce) %>" class="ad-card">
+        <div class="ad-image">
+          <% if annonce.image.attached? %>
+            <%= image_tag annonce.image, alt: annonce.titre, class: "annonce-image" %>
+          <% else %>
+            <div class="annonce-image">
+              <span style="color: #999;">Pas d image</span>
+            </div>
+          <% end %>
+        </div>
+        <div class="ad-details">
+          <h3><%= annonce.titre %></h3>
+          <p class="ad-price"><%= number_to_currency(annonce.prix, unit: "MAD ", precision: 0) %></p>
+        </div>
+      </a>
+    <% end %>
+  </div>
+</div>
+
+<!-- Ajout d'un warning message comme sur Avito -->
+<div class="warning-message">
+  <i class="fas fa-shield-alt"></i>
+  Il ne faut jamais envoyer d argent à l avance au vendeur par virement ou agence de transfert.
+  <a href="#" class="report-abuse">SIGNALER UN ABUS</a>
+</div>
+
+  
+  <!-- Footer section -->
+  <footer class="avito-footer">
+    <div class="footer-columns">
+      <div class="footer-column">
+        <h4>AVITO VÉHICULES</h4>
+        <ul>
+          <li><a href="#">Voitures</a></li>
+          <li><a href="#">Motos</a></li>
+          <li><a href="#">Vélos</a></li>
+          <li><a href="#">Camions</a></li>
+          <li><a href="#">Bateaux</a></li>
+          <li><a href="#">Accessoires auto</a></li>
+          <li><a href="#">Pièces de rechange</a></li>
+          <li><a href="#">Autres véhicules</a></li>
+          <li><a href="#">Plus de catégories</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-column">
+        <h4>AVITO IMMOBILIER</h4>
+        <ul>
+          <li><a href="#">Appartements</a></li>
+          <li><a href="#">Maisons & villas</a></li>
+          <li><a href="#">Bureaux & commerces</a></li>
+          <li><a href="#">Locations vacances</a></li>
+          <li><a href="#">Colocations</a></li>
+          <li><a href="#">Terrains</a></li>
+          <li><a href="#">Plus de catégories</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-column">
+        <h4>AVITO ENTREPRISE</h4>
+        <ul>
+          <li><a href="#">Emploi</a></li>
+          <li><a href="#">Services</a></li>
+          <li><a href="#">Matériel professionnel</a></li>
+          <li><a href="#">Évènements</a></li>
+          <li><a href="#">Cours particuliers</a></li>
+          <li><a href="#">Plus de catégories</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-column">
+        <h4>AVITO MARKET</h4>
+        <ul>
+          <li><a href="#">Multimédia</a></li>
+          <li><a href="#">Électroménager</a></li>
+          <li><a href="#">Maison & décoration</a></li>
+          <li><a href="#">Vêtements & accessoires</a></li>
+          <li><a href="#">Loisirs & jeux vidéo</a></li>
+          <li><a href="#">Plus de catégories</a></li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <div class="footer-logo">
+        <img src="/assets/avito_logo.png" alt="Avito Logo">
+      </div>
+      <div class="footer-copyright">
+        &copy; 2025 Avito - Tous droits réservés
+      </div>
+      <div class="footer-social">
+        <a href="#"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+      </div>
+    </div>
+  </footer>
+</div>
 </div>

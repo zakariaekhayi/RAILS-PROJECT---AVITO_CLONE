@@ -1,16 +1,18 @@
+
+<%= stylesheet_link_tag "all_annonces", "data-turbo-track": "reload" %>
 <div class="container mx-auto px-4 py-8">
   <h1 class="text-2xl font-bold mb-6">Toutes les annonces</h1>
 
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
     <% @annonces.each do |annonce| %>
       <div class="border rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
-        <% if annonce.image.present? %>
-          <img src="<%= annonce.image %>" alt="<%= annonce.titre %>" class="w-full h-48 object-cover">
-        <% else %>
-          <div class="w-full h-48 bg-gray-200 flex items-center justify-center">
-            <span class="text-gray-500">Pas d image</span>
-          </div>
-        <% end %>
+      <% if annonce.image.attached? %>
+      <%= image_tag annonce.image, alt: annonce.titre, class: "annonce-image" %>
+    <% else %>
+      <div class="annonce-image">
+        <span style="color: #999;">Pas d image</span>
+      </div>
+    <% end %>
         
         <div class="p-4">
           <h2 class="text-xl font-semibold"><%= annonce.titre %></h2>

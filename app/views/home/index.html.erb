@@ -427,47 +427,49 @@
 <body>
 
 
-  <!-- Search Container -->
+  <!-- Search Container -->  
   <div class="search-container">
-    <input type="text" class="search-input" placeholder="Que recherchez-vous ?">
-    <select class="category-select">
-      <option value="">Toutes les catégories</option>
-      <option value="immobilier">Immobilier</option>
-      <option value="vehicules">Véhicules</option>
-      <option value="marketplace">Marketplace</option>
-      <option value="emploi_services">Emplois et Services</option>
-    </select>
-    <select class="location-select">
-      <option value="">Choisir ville - secteur</option>
-      <option value="casablanca">Casablanca</option>
-      <option value="rabat">Rabat</option>
-      <option value="marrakech">Marrakech</option>
-      <option value="tanger">Tanger</option>
-    </select>
-    <button class="search-btn">Rechercher</button>
+  <%= form_with url: search_annonces_path, method: :get, class: "search-container" do |f| %>   <!-- c'est une technique pour generer un formulaire par rails  form.text_field:title genere un input et form.lable genere un lable ..-->
+    <%= f.text_field :query, class: "search-input", placeholder: "Que recherchez-vous ?" %>   <!- le pourcentage -Utilisé pour évaluer du code Ruby et afficher le résultat dans la page HTML-->
+    <%= f.select :categorie, options_for_select([
+      ["Toutes les catégories", ""],
+      ["Immobilier", "immobilier"],
+      ["Véhicules", "vehicules"],
+      ["Marketplace", "marketplace"],
+      ["Emplois et Services", "emploi_services"]
+    ]), {}, { class: "category-select" } %>
+    <%= f.select :ville, options_for_select([
+      ["Choisir ville - secteur", ""],
+      ["Casablanca", "casablanca"],
+      ["Rabat", "rabat"],
+      ["Marrakech", "marrakech"],
+      ["Tanger", "tanger"]
+    ]), {}, { class: "location-select" } %>
+    <%= f.submit "Rechercher", class: "search-btn" %>
+  <% end %>
   </div>
 
   <!-- Categories Section -->
   <div class="categories-section">
-    <div class="categories-grid">
-      <a href="#" class="category-card">
-        <div class="category-icon">🏠</div>
-        <span>Immobilier</span>
-      </a>
-      <a href="#" class="category-card">
-        <div class="category-icon">🚗</div>
-        <span>Véhicules</span>
-      </a>
-      <a href="#" class="category-card">
-        <div class="category-icon">🛒</div>
-        <span>Marketplace</span>
-      </a>
-      <a href="#" class="category-card">
-        <div class="category-icon">👔</div>
-        <span>Emplois et Services</span>
-      </a>
-    </div>
+  <div class="categories-grid">
+    <%= link_to search_annonces_path(categorie: "immobilier"), class: "category-card" do %>
+      <div class="category-icon">🏠</div>
+      <span>Immobilier</span>
+    <% end %>
+    <%= link_to search_annonces_path(categorie: "vehicules"), class: "category-card" do %>
+      <div class="category-icon">🚗</div>
+      <span>Véhicules</span>
+    <% end %>
+    <%= link_to search_annonces_path(categorie: "marketplace"), class: "category-card" do %>
+      <div class="category-icon">🛒</div>
+      <span>Marketplace</span>
+    <% end %>
+    <%= link_to search_annonces_path(categorie: "emploi_services"), class: "category-card" do %>
+      <div class="category-icon">👔</div>
+      <span>Emplois et Services</span>
+    <% end %>
   </div>
+</div>
 
   <div class="main-content">
     <h1>Bienvenue sur notre clone d Avito</h1>
@@ -510,16 +512,17 @@
         <% @annonces.each do |annonce| %>
           <%= link_to annonce_path(annonce), style: "text-decoration: none; color: inherit;" do %>
             <div class="annonce-card">
-              <% if annonce.image.present? %>
-                <img src="<%= annonce.image %>" alt="<%= annonce.titre %>" class="annonce-image">
-              <% else %>
-                <div class="annonce-image">
-                  <span style="color: #999;">Pas d image</span>
-                </div>
-              <% end %>
-              
+            
+            <% if annonce.image.attached? %>
+            <%= image_tag annonce.image, alt: annonce.titre, class: "annonce-image" %>
+          <% else %>
+            <div class="annonce-image">
+              <span style="color: #999;">Pas d image</span>
+            </div>
+          <% end %>
+              <!--personnaliser ce qui est affiche -->
               <div class="annonce-details">
-                <h3 class="annonce-title"><%= truncate(annonce.titre, length: 40) %></h3>
+                <h3 class="annonce-title"><%= truncate(annonce.titre, length: 40) %></h3>  
                 <p class="annonce-price"><%= number_to_currency(annonce.prix, unit: "MAD ", precision: 0) %></p>
                 <p class="annonce-location"><%= annonce.ville %></p>
                 <p class="annonce-date">Publié le <%= annonce.created_at.strftime("%d/%m/%Y") %></p>
@@ -551,59 +554,78 @@
     <div class="annonces-grid">
       <!-- Insérer ici le contenu dynamique du magazine -->
     </div>
-  </div>
 
-  <!-- Footer -->
-  <footer>
-    <div class="footer-container">
-      <div class="footer-section">
-        <h3>AVITO VÉHICULES</h3>
-        <ul class="footer-links">
-          <li><a href="#">VOITURES</a></li>
-          <li><a href="#">Voitures d occasion</a></li>
-          <li><a href="#">MOTOS</a></li>
-          <li><a href="#">VÉLOS</a></li>
-          <li><a href="#">PIÈCES ET ACCESSOIRES</a></li>
+
+  <!-- Footer section -->
+  <footer class="avito-footer">
+    <div class="footer-columns">
+      <div class="footer-column">
+        <h4>AVITO VÉHICULES</h4>
+        <ul>
+          <li><a href="#">Voitures</a></li>
+          <li><a href="#">Motos</a></li>
+          <li><a href="#">Vélos</a></li>
+          <li><a href="#">Camions</a></li>
+          <li><a href="#">Bateaux</a></li>
+          <li><a href="#">Accessoires auto</a></li>
+          <li><a href="#">Pièces de rechange</a></li>
+          <li><a href="#">Autres véhicules</a></li>
+          <li><a href="#">Plus de catégories</a></li>
         </ul>
       </div>
       
-      <div class="footer-section">
-        <h3>AVITO IMMOBILIER</h3>
-        <ul class="footer-links">
-          <li><a href="#">VENTES IMMOBILIÈRES</a></li>
-          <li><a href="#">Appartement à vendre</a></li>
-          <li><a href="#">Maisons à vendre</a></li>
-          <li><a href="#">LOCATIONS IMMOBILIÈRES</a></li>
-          <li><a href="#">Appartement à louer</a></li>
+      <div class="footer-column">
+        <h4>AVITO IMMOBILIER</h4>
+        <ul>
+          <li><a href="#">Appartements</a></li>
+          <li><a href="#">Maisons & villas</a></li>
+          <li><a href="#">Bureaux & commerces</a></li>
+          <li><a href="#">Locations vacances</a></li>
+          <li><a href="#">Colocations</a></li>
+          <li><a href="#">Terrains</a></li>
+          <li><a href="#">Plus de catégories</a></li>
         </ul>
       </div>
       
-      <div class="footer-section">
-        <h3>AVITO ENTREPRISE</h3>
-        <ul class="footer-links">
-          <li><a href="#">EMPLOI</a></li>
-          <li><a href="#">Centre d appels</a></li>
-          <li><a href="#">SERVICES</a></li>
-          <li><a href="#">STAGES, COURS ET FORMATIONS</a></li>
-          <li><a href="#">Cours et Formations</a></li>
+      <div class="footer-column">
+        <h4>AVITO ENTREPRISE</h4>
+        <ul>
+          <li><a href="#">Emploi</a></li>
+          <li><a href="#">Services</a></li>
+          <li><a href="#">Matériel professionnel</a></li>
+          <li><a href="#">Évènements</a></li>
+          <li><a href="#">Cours particuliers</a></li>
+          <li><a href="#">Plus de catégories</a></li>
         </ul>
       </div>
       
-      <div class="footer-section">
-        <h3>AVITO MARKET</h3>
-        <ul class="footer-links">
-          <li><a href="#">INFORMATIQUE, MULTIMEDIA ET GADGETS</a></li>
-          <li><a href="#">Smartphone et Téléphone</a></li>
-          <li><a href="#">ÉQUIPEMENT POUR BÉBÉ ET ENFANT</a></li>
-          <li><a href="#">MAISON ET JARDIN</a></li>
-          <li><a href="#">Petit Électroménager</a></li>
+      <div class="footer-column">
+        <h4>AVITO MARKET</h4>
+        <ul>
+          <li><a href="#">Multimédia</a></li>
+          <li><a href="#">Électroménager</a></li>
+          <li><a href="#">Maison & décoration</a></li>
+          <li><a href="#">Vêtements & accessoires</a></li>
+          <li><a href="#">Loisirs & jeux vidéo</a></li>
+          <li><a href="#">Plus de catégories</a></li>
         </ul>
       </div>
     </div>
     
-    <div class="copyright">
-      © 2025 Clone Avito - Tous droits réservés
+    <div class="footer-bottom">
+      <div class="footer-logo">
+        <img src="/assets/avito_logo.png" alt="Avito Logo">
+      </div>
+      <div class="footer-copyright">
+        &copy; 2025 Avito - Tous droits réservés
+      </div>
+      <div class="footer-social">
+        <a href="#"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+      </div>
     </div>
   </footer>
+</div>
 </body>
 </html>
