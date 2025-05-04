@@ -1,24 +1,50 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Capture d'écran de site
 
-Things you may want to cover:
+- **Navbar**  
+  ![alt text](image.png)
 
-* Ruby version
+- **Homepage**  
+  ![alt text](image-1.png)  
+  ![alt text](image-2.png)
 
-* System dependencies
+- **Login**  
+  ![alt text](image-3.png)
 
-* Configuration
+- **Sign Up**  
+  ![alt text](image-4.png)
 
-* Database creation
+- **Publier annonce**  
+  ![alt text](image-5.png)
 
-* Database initialization
+- **Mes annonces**  
+  ![alt text](image-6.png)
 
-* How to run the test suite
+- **Détail annonce**  
+  ![alt text](image-7.png)
 
-* Services (job queues, cache servers, search engines, etc.)
+- **Annonces de même boutique**  
+  ![alt text](image-8.png)
 
-* Deployment instructions
+- **Modifier annonces**  
+  ![alt text](image-9.png)
 
-* ...
+## Annexes
+
+### Diagramme UML
+
+- **Diagramme de cas d'utilisation**  
+  ![alt text](image-10.png)
+
+- **Diagramme de séquence**  
+  ![alt text](image-11.png)
+
+---
+
+### Création du modèle des annonces avec scaffold
+
+Pour générer automatiquement le modèle, le contrôleur, les vues, la migration et les routes associées à une ressource Annonce, j’ai utilisé la commande suivante dans le terminal :
+
+```bash
+rails generate scaffold Annonce titre:string description:text prix:decimal categorie:string ville:string image:string user:references
