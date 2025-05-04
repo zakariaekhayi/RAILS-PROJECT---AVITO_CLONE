@@ -3,42 +3,54 @@
 ## Capture d'écran de site
 
 - **Navbar**  
-  ![alt text](image.png)
+  ![image](https://github.com/user-attachments/assets/7e95eba4-3c35-42fb-a4f8-071952be92ba)
+
 
 - **Homepage**  
-  ![alt text](image-1.png)  
-  ![alt text](image-2.png)
+  ![image](https://github.com/user-attachments/assets/20069400-56df-44f3-9a15-5f3c9cc9218b)
+
+![image](https://github.com/user-attachments/assets/087d1049-a1b8-491b-b67f-36e19c96a3db)
+
 
 - **Login**  
-  ![alt text](image-3.png)
+ ![image](https://github.com/user-attachments/assets/86b38a7a-7639-49c4-9adc-609971c0a668)
+
 
 - **Sign Up**  
-  ![alt text](image-4.png)
+ ![image](https://github.com/user-attachments/assets/24fe4683-4bd4-401a-a5f8-8b2b0a86bc1c)
+
 
 - **Publier annonce**  
-  ![alt text](image-5.png)
+ ![image](https://github.com/user-attachments/assets/51870f2e-2b5f-4bbe-a378-4a7edf1cae6e)
+
 
 - **Mes annonces**  
-  ![alt text](image-6.png)
+  ![image](https://github.com/user-attachments/assets/f534f8fa-e204-4352-a706-0462282a7031)
+
 
 - **Détail annonce**  
-  ![alt text](image-7.png)
+![image](https://github.com/user-attachments/assets/2865879f-5873-4440-8e87-d2357768ac5b)
+
 
 - **Annonces de même boutique**  
-  ![alt text](image-8.png)
+ ![image](https://github.com/user-attachments/assets/b407b015-1908-494e-9e43-87c77b32616b)
+
 
 - **Modifier annonces**  
-  ![alt text](image-9.png)
+![image](https://github.com/user-attachments/assets/f4c43ec9-c8fa-4f84-9816-d1c987ae152e)
+
 
 ## Annexes
 
 ### Diagramme UML
 
 - **Diagramme de cas d'utilisation**  
-  ![alt text](image-10.png)
+![image](https://github.com/user-attachments/assets/df2feba9-3262-4edd-acfb-bbffd4424284)
+
 
 - **Diagramme de séquence**  
-  ![alt text](image-11.png)
+  ![image](https://github.com/user-attachments/assets/3c1f0f84-9b4c-4b85-97f6-286988d70a9c)
+
 
 ---
 
